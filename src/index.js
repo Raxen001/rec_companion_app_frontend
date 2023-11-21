@@ -1,15 +1,52 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import reportWebVitals from "./reportWebVitals";
+import { NextUIProvider } from "@nextui-org/react";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Marks from "./pages/Marks";
+
+import { Audio } from "react-loader-spinner";
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+  BrowserRouter,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login />,
+    loader: Audio,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+    loader: Audio,
+  },
+  {
+    path: "/home",
+    element: <Home />,
+    loader: Audio,
+  },
+  {
+    path: "/marks",
+    element: <Marks />,
+    loader: Audio,
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <NextUIProvider>
+      <RouterProvider router={router} />
+    </NextUIProvider>
+  </React.StrictMode>,
 );
 
 // If you want your app to work offline and load faster, you can change
