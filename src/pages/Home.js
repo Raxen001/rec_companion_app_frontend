@@ -1,6 +1,8 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { Image } from "@nextui-org/react";
+
+import "../index.css";
 import {
   Table,
   TableHeader,
@@ -15,6 +17,7 @@ import { Audio } from "react-loader-spinner";
 
 import Marks from "./Marks";
 import Grade from "./Grade";
+import Logout from "../components/logout";
 
 //debug
 
@@ -47,24 +50,18 @@ function Home() {
       .finally(function () {});
   };
   useEffect(getData, [rollno]);
-  const style = {
-    height: "20rem",
-    widht: "auto",
-  };
 
   return (
-    <div>
+    <div className="center">
       {/* <Login /> */}
-      <div className="w-full center">
-        <Image
-          className="w-full center"
-          width={300}
-          alt="USER"
-          src={data.image}
-          fallbackSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Grey_-_Squared_-_User_list_%28Deus_WikiProjects%29.png/1024px-Grey_-_Squared_-_User_list_%28Deus_WikiProjects%29.png"
-        />
-      </div>
-      <Table isStriped>
+      <Logout className="right" />
+      <Image
+        width={300}
+        alt="USER"
+        src={data.image}
+        fallbackSrc="https://via.placeholder.com/300x300"
+      />
+      <Table radius="none" shadow="none" isStriped>
         <TableHeader>
           <TableColumn>NAME</TableColumn>
           <TableColumn>ROLE</TableColumn>

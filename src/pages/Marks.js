@@ -9,10 +9,10 @@ import {
   TableCell,
   getKeyValue,
   Pagination,
-  PaginationItem,
-  PaginationCursor,
-  Button,
-  Image,
+  // PaginationItem,
+  // PaginationCursor,
+  // Button,
+  // Image,
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 //debug
@@ -34,16 +34,16 @@ function Marks() {
       setRollno(localStorage.getItem("rollno"));
     }
     if (rollno) {
-      const url = "http://raxen-ideapad:8080/internal-marks/" + rollno;
+      const url = `http://raxen-ideapad:8080/internal-marks/${rollno}`;
       axios
         .get(url, {})
-        .then(function (response) {
+        .then(function(response) {
           // console.log(response.data);
           // console.log(data[1][0]);
           setData(response.data);
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch(function(error) {
+          console.log("shit good luck; i ain't fixing that", error);
         })
         .finally(() => {
           // console.log(data[1][0]);
@@ -53,6 +53,14 @@ function Marks() {
 
   // debug
   // console.log(data);
+  // voodoo magic to cache the data. Then use ?. operator to return only when the data is defined.
+  // js sucks ass
+  // don't ever use javascript.
+  // waiting for wasm to take over tbh
+  // if rust frontend was a bit more mature i would be using that instead of this react shit
+  //
+  // pagination just changes the `key` value
+  // useing useState
   const rows = useMemo(() => {
     return data?.[sempage]?.[catpage];
   }, [data, catpage, sempage]);
@@ -72,7 +80,8 @@ function Marks() {
   //
   //
   //
-
+  // defines the columns in the table
+  // the rows are supplied by the api backend
   const columns = [
     {
       key: "SubjName",
@@ -99,11 +108,14 @@ function Marks() {
   // console.log(data[1][0]);
   //
   return (
-    <div>
+    <div className="dark bg-background text-foreground">
       <Table
-        aria-label="Example table with dynamic content"
+        radius="none"
+        shadow="none"
+        isStriped
         topContent={
           <div>
+            <h1>Semester</h1>
             <Pagination
               showControls
               total={no_sems}
@@ -111,6 +123,7 @@ function Marks() {
               page={sempage}
               onChange={(page) => setSempage(page)}
             />
+            <h1>CAT</h1>
             <Pagination
               showControls
               total={3}

@@ -9,6 +9,7 @@ import {
   TableCell,
   getKeyValue,
   Pagination,
+  SortDescriptor,
   PaginationItem,
   PaginationCursor,
   Button,
@@ -109,9 +110,12 @@ function Grade() {
   return (
     <div>
       <Table
-        aria-label="Example table with dynamic content"
+        radius="none"
+        shadow="none"
+        isStriped
         topContent={
           <div>
+            <h1>Semester</h1>
             <Pagination
               showControls
               total={no_sems}
