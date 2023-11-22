@@ -11,6 +11,13 @@ import {
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
+import { Audio } from "react-loader-spinner";
+
+import Marks from "./Marks";
+import Grade from "./Grade";
+
+//debug
+
 function Home() {
   // auth
   const [rollno, setRollno] = useState("");
@@ -27,7 +34,7 @@ function Home() {
 
   const [data, setData] = useState({});
   const getData = () => {
-    const url = "http://localhost:8080/get-info/" + rollno;
+    const url = "http://raxen-ideapad:8080/get-info/" + rollno;
     axios
       .get(url, {})
       .then(function (response) {
@@ -124,8 +131,31 @@ function Home() {
             </TableCell>
             <TableCell>{data["Sex"]}</TableCell>
           </TableRow>
+
+          <TableRow>
+            <TableCell>
+              <h2>CGPA</h2>
+            </TableCell>
+            <TableCell>{data["CGPA"]}</TableCell>
+          </TableRow>
+
+          <TableRow>
+            <TableCell>
+              <h2>Total Attendance</h2>
+            </TableCell>
+            <TableCell>{data["P_Percentage"]}</TableCell>
+          </TableRow>
+
+          <TableRow>
+            <TableCell>
+              <h2>Total Arrear</h2>
+            </TableCell>
+            <TableCell>{data["totalArrear"]}</TableCell>
+          </TableRow>
         </TableBody>
       </Table>
+      <Marks />
+      <Grade />
     </div>
   );
 }

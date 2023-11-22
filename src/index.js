@@ -8,6 +8,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Marks from "./pages/Marks";
+import Grade from "./pages/Grade";
 
 import { Audio } from "react-loader-spinner";
 
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
   {
     path: "/marks",
     element: <Marks />,
+    loader: Audio,
+  },
+  {
+    path: "/grade",
+    element: <Grade />,
     loader: Audio,
   },
 ]);
